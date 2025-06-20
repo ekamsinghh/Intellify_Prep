@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+SA+Hand:wght@400..700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+#root{
+  height: 100%;
+}
+
+body{
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 500;
+    background-color: #ffffff;
+}
+
+.icons a{
+  transform:scale(1.25);
+}
+
+.icons a:hover{
+  transform:scale(1.5);
+}
+
+.effect{
+  position:relative;
+  top:2px;
+  transition: all 0.1s ease-in-out;
+}
+
+.effect:hover{
+  box-shadow: 0px 4px 2px 0px rgb(174, 169, 129);
+  transform:scale(1.1);
+  top:0px;
+}
+
+.effect:active{
+  transform:scale(1);
+}
+
+.login:hover{
+  background:rgb(216, 125, 14);
+}
+
+.input-box{
+  border:2px solid rgb(227, 224, 224);
+  display:flex;
+  align-items:center;
+  padding:10px 13px;
+  border-radius:5px;
+  transition: all 0.2s ease-in-out;
+  background:rgb(247, 247, 247);
+}
+
+.input-box:focus-within{
+  border:2px solid rgb(216, 125, 14);
+}
+
+.btn-primary{
+  background:black;
+  color:white;
+  font:bold;
+  width:100%;
+  padding:12px;
+  border-radius:5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover{
+  color:black;
+  background:rgb(254, 221, 177);
+}
+.btn-primary:active{
+  transform:scale(0.97);
+}
