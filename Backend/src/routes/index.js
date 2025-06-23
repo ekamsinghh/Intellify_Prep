@@ -1,8 +1,11 @@
 const express= require('express');
-const v1 = require("./v1/index");
-
+const auth = require("./v1/authRoutes");
+// const question = require("./v1/questionRoutes");
+// const session = require('./v1/sessionRoutes');
 const router=express.Router();
 
-router.use('/v1',v1);
+router.use('/v1/auth',auth);
+// router.use('/v1/questions',question);
+// router.use('/v1/sessions',session);
 
-module.exports =router
+module.exports = router
