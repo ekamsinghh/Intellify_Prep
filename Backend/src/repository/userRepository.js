@@ -20,6 +20,17 @@ class UserRepository{
             throw err;
         }
     }
+
+    async findUser(data){
+        try{
+            const user=await this.user.findOne({email:data.email});
+            return user;
+        }
+        catch(err){
+            console.log("Some error occured in repository");
+            throw err;
+        }
+    }
 }
 
 module.exports = UserRepository;

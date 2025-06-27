@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { JWT_SECRET } = require('../config/index');
 const bcrypt = require('bcrypt');
 const UserRepository = require('../repository/userRepository');
 
@@ -7,18 +8,44 @@ class UserService {
         this.userRepository = new UserRepository();
     }
 
-    #generateToken(id){
-        return jwt.sign({ id: id }, JWT_SECRET , { expiresIn: "7d" });
+    #generateToken(userId){
+        return jwt.sign({ id: userId }, JWT_SECRET , { expiresIn: "7d" });
+    }
+
+
+    #comparePassword(password,user){
+        return bcrypt.compare(password,user.password);
     }
 
     //Creating/Registering a new User
     async createUser(data){
         try{
             const user= await this.userRepository.createUser(data);
-            return user;
+            return {
+                ...data,
+                token: this.#generateToken(user.id)
+            };
         }
         catch(err){
-            if(err)
+            console.log("Some error occured in service layer");
+            throw err;
+        }
+    }
+
+    async findUser(data){
+        try{
+            const user = await this.userRepository.findUser(data);
+            if(!user){
+                throw "User Not Found";
+            }
+            if(!(await this.#comparePassword(data.password,user))){
+                throw "Incorrect Password";
+            }
+            return {
+                token: this.#generateToken(user.id)
+            };
+        }
+        catch(err){
             console.log("Some error occured in service layer");
             throw err;
         }
