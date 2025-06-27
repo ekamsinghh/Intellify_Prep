@@ -6,6 +6,10 @@ const app = express();
 const v1ApiRoutes = require('./routes/index');
 const connect = require('./config/db_config');
 
+//For body parsing
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // redirecting the routes
 app.use('/api',v1ApiRoutes);
 
@@ -23,10 +27,6 @@ app.use(cors({
 //Serves the files from uploads folder(static files{which don't change over time})
 app.use("/uploads",express.static(path.join(__dirname, "uploads"), {}));
 
-
-//For body parsing
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 app.listen(PORT,async () => {
     console.log('Server is running on port ',PORT);

@@ -12,6 +12,13 @@ const registerUser= async (req,res) => {
         });
     }
     catch(err){
+        if(err=="Mail already Registered!"){
+            return res.status(400).json({
+                data: {},
+                success: false,
+                error: err
+            });
+        }
         return res.status(500).json({
             message: "Something went wrong",
             data: {},
@@ -20,6 +27,8 @@ const registerUser= async (req,res) => {
         });
     }
 }
+
+
 
 module.exports= {
     registerUser

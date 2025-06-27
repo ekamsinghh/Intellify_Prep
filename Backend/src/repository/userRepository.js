@@ -7,6 +7,11 @@ class UserRepository{
 
     async createUser(data){
         try{
+            const exists=await this.user.findOne({email:data.email});// checking if user already exists
+            if(exists){
+                const err= "Mail already Registered!";
+                throw err;
+            }
             const user= await this.user.create(data);
             return user;
         }
