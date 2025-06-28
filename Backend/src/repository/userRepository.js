@@ -21,9 +21,9 @@ class UserRepository{
         }
     }
 
-    async findUser(data){
+    async findUserByEmail(mail){
         try{
-            const user=await this.user.findOne({email:data.email});
+            const user=await this.user.findOne({email:mail});
             return user;
         }
         catch(err){
@@ -31,6 +31,19 @@ class UserRepository{
             throw err;
         }
     }
+
+    async findUserById(userId){
+        try{
+            console.log(userId);
+            const user = await this.user.findById(userId).select("-password");// this excludes the password for security reasons
+            return user;
+        }
+        catch(err){
+            console.log("Some error occured in repository");
+            throw err;
+        }
+    }
+    
 }
 
 module.exports = UserRepository;

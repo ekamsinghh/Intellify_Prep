@@ -34,7 +34,7 @@ class UserService {
 
     async findUser(data){
         try{
-            const user = await this.userRepository.findUser(data);
+            const user = await this.userRepository.findUserByEmail(data.email);
             if(!user){
                 throw "User Not Found";
             }
@@ -44,6 +44,20 @@ class UserService {
             return {
                 token: this.#generateToken(user.id)
             };
+        }
+        catch(err){
+            console.log("Some error occured in service layer");
+            throw err;
+        }
+    }
+
+    async findUserById(userId){
+        try{
+            const user = await this.userRepository.findUserById(userId);
+            if(!user){
+                throw "User Not Found";
+            }
+            return user;
         }
         catch(err){
             console.log("Some error occured in service layer");
