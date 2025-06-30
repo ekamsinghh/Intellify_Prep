@@ -13,9 +13,6 @@ app.use(express.urlencoded({ extended: true }));
 // redirecting the routes
 app.use('/api',v1ApiRoutes);
 
-// app.use('/api/ai/generate-questions', protect , generateInterviewQuestions);
-// app.use('/api/ai/generate-explanation', protect , generateConceptExplanation);
-
 //Middlware setup for cross origin requests
 app.use(cors({
     origin: "*",// Allows the requests from all the origins
