@@ -21,11 +21,13 @@ const sessionShema= new mongoose.Schema({
         type: String,
         required: true
     },
-    question: {
-        type: mongoose.mongoose.Schema.Types.ObjectId,
-        ref: 'Question'
-    } 
-}, {timeStamps: true});
+    questions: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Question'
+        }
+    ]
+}, {timestamps: true});
 
 const Session= mongoose.model('Session',sessionShema);
 module.exports=Session;
