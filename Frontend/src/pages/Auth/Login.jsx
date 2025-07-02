@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import{useState} from 'react'
 import{useNavigate} from 'react-router-dom'
 import Input from '../../components/Inputs/Input';
 import { validateEmail } from '../../utils/helper';
+import axiosInstance  from '../../utils/axiosInstance';
+import { API_PATHS } from '../../utils/apiPaths';
+import { UserContext } from '../../context/userContext';
+
 
 const Login = ({ setCurrentPage }) => {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [error, setError] = useState(null);
 
+    const { updateUser } = useContext(UserContext);
     const navigate = useNavigate();
 
     //Handling Login Form Submit
@@ -29,7 +34,18 @@ const Login = ({ setCurrentPage }) => {
 
         //API Handling
         try{
+            const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN,{
+                email,
+                password
+            });
+            const { token } = response.data.data;
+            
+            updateUser(response.data.data);
 
+            if(token){
+                localStorage.setItem("token",token);
+                navigate("/dashboard");
+            }
         }
         catch(err){
             if(err.response && err.response.data.message){

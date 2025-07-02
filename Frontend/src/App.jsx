@@ -5,10 +5,11 @@ import {Toaster} from 'react-hot-toast';//toaster is used to create "toasts" i.e
 import LandingPage from './pages/LandingPage';
 import Dashboard from './pages/Home/Dashboard';
 import InterviewPrep from './pages/InterviewPrep/InterviewPrep';
+import UserProvider from './context/userContext';
 
 function App() {
   return (
-    <>
+    <UserProvider>
       <div className="w-full h-full">
         <Router>
           <Routes>
@@ -30,7 +31,7 @@ function App() {
         }}
         />
       </div>
-    </>
+    </UserProvider>
   )
 }
 

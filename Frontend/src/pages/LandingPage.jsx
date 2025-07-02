@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import model from "../assets/model.png"
 import { APP_FEATURES } from "../utils/data.js";
@@ -9,14 +9,23 @@ import { FaInstagram , FaGithub , FaLinkedin } from "react-icons/fa";
 import Modal from '../components/Modal';
 import Login from './Auth/Login';
 import SignUp from './Auth/SignUp';
+import { UserContext } from '../context/userContext.jsx';
+import ProfileInfoCard from '../components/Cards/ProfileInfoCard.jsx';
 
 const LandingPage = () => {
+
+  const {user} = useContext(UserContext);
   const navigate= useNavigate();
   const [authModal, setAuthModal] = useState(false);
-  const [currentPage,setCurrentPage]= useState("login");
+  const [currentPage,setCurrentPage]= useState("signup");
 
   const handle = () => {
-
+    if(!user){
+      setAuthModal(true);
+    }
+    else{
+      navigate("/dashboard");
+    }
   };
   return (
     <>
@@ -25,10 +34,12 @@ const LandingPage = () => {
           <div className="container mx-auto px-2 py-6 pb-[200px] relative z-10">
             <header className="flex justify-between items-center">
               <div className="text-3xl font-bold  relative top-0 left-0">Intellify Prep</div>
-              <button
+              {user? (
+                <ProfileInfoCard />
+              ):(<button
               className="py-2.25 text-lg login bg-linear-to-r from-[#f07a03] to-[#f0861c] font-semibold text-white px-7 rounded-full border border-white cursor-pointer"
               onClick={()=> setAuthModal(true)}
-              >Login</button>
+              >Sign Up</button>)}
             </header>
             <br/>
             <br/>
@@ -116,7 +127,10 @@ const LandingPage = () => {
 
       <Modal
         isOpen={authModal}
-        onClose={()=> setAuthModal(false)}
+        onClose={()=> {
+          setAuthModal(false);
+          setCurrentPage("signup");
+        }}
         hideHeader
       >
         <div>
