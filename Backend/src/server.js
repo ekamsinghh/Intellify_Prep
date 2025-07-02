@@ -10,9 +10,6 @@ const connect = require('./config/db_config');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// redirecting the routes
-app.use('/api',v1ApiRoutes);
-
 //Middlware setup for cross origin requests
 app.use(cors({
     origin: "*",// Allows the requests from all the origins
@@ -20,6 +17,8 @@ app.use(cors({
     allowedHeaders: ["Content-Type", "Authorization"]// if we don't define or set these two are the default values
 }));
 
+// redirecting the routes
+app.use('/api',v1ApiRoutes);
 
 //Serves the files from uploads folder(static files{which don't change over time})
 app.use("/uploads",express.static(path.join(__dirname, "uploads"), {}));
