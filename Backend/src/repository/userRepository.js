@@ -34,7 +34,6 @@ class UserRepository{
 
     async findUserById(userId){
         try{
-            console.log(userId);
             const user = await this.user.findById(userId).select("-password");// this excludes the password for security reasons
             return user;
         }

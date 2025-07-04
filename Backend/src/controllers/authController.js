@@ -41,6 +41,7 @@ const loginUser = async (req,res) => {
     catch(err){
         if(err=="Incorrect Password"){
             return res.status(400).json({
+                message: "Incorrect Password",
                 data: {},
                 success: false,
                 error: err
@@ -48,6 +49,7 @@ const loginUser = async (req,res) => {
         }
         if(err=="User Not Found"){
             return res.status(404).json({
+                message: "User Not Found",
                 data: {},
                 success: false,
                 error: err
@@ -57,7 +59,7 @@ const loginUser = async (req,res) => {
             message: "Something went wrong",
             data: {},
             success: false,
-            error: err
+            error: err.message || "Something went wrong"
         });
     }
 }
@@ -75,6 +77,7 @@ const getUserProfile = async (req,res) => {
     catch(err){
         if(err=="User Not Found"){
             return res.status(404).json({
+                message: "User Not Found",
                 data: {},
                 success: false,
                 error: err

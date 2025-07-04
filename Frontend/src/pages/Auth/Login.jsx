@@ -40,10 +40,10 @@ const Login = ({ setCurrentPage }) => {
             });
             const { token } = response.data.data;
             
-            updateUser(response.data.data);
 
             if(token){
                 localStorage.setItem("token",token);
+                updateUser(response.data.data);
                 navigate("/dashboard");
             }
         }
