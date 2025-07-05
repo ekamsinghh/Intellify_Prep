@@ -48,7 +48,7 @@ body{
   background:rgb(247, 247, 247);
 }
 
-.input-box:focus-within{
+.input-box:focus-within, .input-box:hover{
   border:2px solid rgb(216, 125, 14);
 }
 
