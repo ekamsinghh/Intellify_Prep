@@ -55,11 +55,11 @@ Your intelligent interview preparation helper.
 5. **Run the application:**
    ```bash
    # In one terminal (for the backend)
-   cd server
+   cd Backend
    npm run dev
 
    # In another terminal (for the frontend)
-   cd client
+   cd Frontend
    npm run dev
    ```
 
