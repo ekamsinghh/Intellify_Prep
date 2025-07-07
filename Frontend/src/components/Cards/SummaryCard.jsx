@@ -14,7 +14,7 @@ const SummaryCard = ({
     onDelete
 }) => {
   return (
-    <div className="bg-white border-2 border-gray-300/40 rounded-xl p-2 overflow-hidden cursor-pointer hover:shadow-xl shadow-gray-100 relative group"
+    <div className="bg-white border-2 border-black/30 rounded-xl p-2 overflow-hidden cursor-pointer hover:shadow-xl shadow-gray-250 relative group hover:scale-105 transition-all duration-200 ease-in-out"
     onClick={onSelect}
     >
         <div className="rounded-lg p-4 cursor-pointer relative"
@@ -55,13 +55,13 @@ const SummaryCard = ({
 
         <div className="px-3 pb-3">
             <div className="flex items-center gap-1 mt-4">
-                <div className="text-[12px] font-medium text-black px-3 py-1 border-[0.5px] border-gray-900 rounded-full">
+                <div className="text-[12px] font-medium bg-black text-white px-3 py-1 rounded-full">
                     Experience: {experience} {experience==1 ? "Year":"Years"}
                 </div>
-                <div className="text-[12px] font-medium text-black px-3 py-1 border-[0.5px] border-gray-900 rounded-full">
+                <div className="text-[12px] font-medium bg-black text-white px-3 py-1 rounded-full">
                     {questions.length} Q&A
                 </div>
-                <div className="text-[12px] font-medium text-black px-3 py-1 border-[0.5px] border-gray-900 rounded-full">
+                <div className="text-[12px] font-medium bg-black text-white px-3 py-1 rounded-full">
                     Last Updated: {lastUpdated}
                 </div>
             </div>

@@ -1,30 +1,31 @@
 const questionAnswerPrompt = (role, experience, topics, numberOfQuestions) => (`
-    You are an AI trained to generate technical interview questions ans answers.
+    You are an AI trained to generate technical interview questions and detailed answers.
 
     Task:
-    -Role: ${role}
-    -Experience: ${experience}
-    -Main topics to focus on: ${topics}
-    -Number of questions to generate: ${numberOfQuestions}
-    -For each question generate a detailed answer.
-    -If answer requires a code example, add the required code block to explain the concept.
-    -Keep Formatting very clean and give to the point answers.
-    -Return a pure json array like:
+    - Role: ${role}
+    - Experience level: ${experience}
+    - Main topics to focus on: ${topics}
+    - Number of questions to generate: ${numberOfQuestions}
+    - Each answer should be descriptive and clear.
+    - If necessary, include minimal and well-formatted code examples using triple backticks (\\\`\\\`\\\`).
+    - Do not include markdown formatting outside code blocks.
+    - Avoid using unescaped double quotes or backslashes inside answers.
+    - If inserting special characters, escape them as required for valid JSON (e.g., \\" or \\\\).
+    - Keep answer to the point as required to answer in actual interview.
+    - Keep the output cleanly structured as a **pure JSON array** like below:
     [
-        {
-            "question": "Question 1",
-            "answer": "Answer 1"
-        },
-        {
-            "question": "Question 2",
-            "answer": "Answer 2"
-        }
-        ...
+    {
+        "question": "What is X?",
+        "answer": "Detailed explanation of X. Include code examples inside properly escaped triple backticks if needed."
+    },
+    ...
     ]
 
-    Important Instruction: Do not add any extra text. only return valid JSON of the type aforementioned.
-    Also,don't give lengthy answers.
+    Important Instructions:
+    - Do NOT include any additional explanation or text outside the JSON array.
+    - Ensure the final output is valid JSON that can be parsed directly.
 `);
+
 
 const conceptExplanationPrompt = (question) => (`
     You are an AI trained to explain concepts for the given interview questions.

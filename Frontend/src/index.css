@@ -7,7 +7,7 @@
 body{
     font-family: 'Urbanist', sans-serif;
     font-weight: 500;
-    background-color: #ffffff;
+    background-color: rgb(249, 249, 249);
 }
 
 .icons a{
@@ -69,3 +69,30 @@ body{
 .btn-primary:active{
   transform:scale(0.97);
 }
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-text {
+  background: linear-gradient(
+  to right,
+  #f472b6,  /* rose-400 */
+  #c084fc,  /* purple-400 */
+  #38bdf8,  /* sky-400 */
+  #2dd4bf,  /* teal-400 */
+  #f472b6   /* rose-400 again for loop effect */
+);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+

@@ -79,7 +79,7 @@ const LandingPage = () => {
             <img
             src={model}
             alt="Demo_Image"
-            className="w-[80vw] rounded-lg border border-amber-500"
+            className="w-[80vw] rounded-lg border-2 border-black"
             />
           </section>
         </div>

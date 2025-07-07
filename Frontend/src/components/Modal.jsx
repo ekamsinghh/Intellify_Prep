@@ -1,14 +1,14 @@
 import React from 'react'
 
-const Modal = ({children, isOpen, onClose,title, hideHeader}) => {
+const Modal = ({children, isOpen, onClose,title, hideHeader,cls=""}) => {
 
     if(!isOpen) return null;
   return (
     <div className="fixed inset-0 z-50 flex justify-center items-center w-full h-full bg-black/40">
-        <div className={`relative flex flex-col bg-white shadow-lg rounded-lg overflow-hidden`}>
+        <div className={`relative flex flex-col bg-white shadow-lg rounded-lg overflow-hidden ${cls}`}>
             {!hideHeader && (
                 <div className="flex items-center justify-between p-4 border border-gray-200">
-                    <h3 className="md:text-lg font-medium text-gray-900">{title}</h3>
+                    <h3 className="text-lg md:text-xl font-semibold text-gray-900">{title}</h3>
                 </div>
             )}
 

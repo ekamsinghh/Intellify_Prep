@@ -3,7 +3,10 @@ import { UserContext } from '../../context/userContext'
 import { useNavigate } from 'react-router-dom';
 
 import profile from "../../utils/profile.png";
-const ProfileInfoCard = () => {
+const ProfileInfoCard = ({
+    cls,
+    logout_class
+}) => {
     const { user, clearUser } = useContext(UserContext);
     const navigate = useNavigate();
 
@@ -19,11 +22,11 @@ const ProfileInfoCard = () => {
             className="w-11 h-11 bg-gray-300 rounded-full mr-3"
         />
         <div>
-            <div className="text-[15px] text-black font-bold leading-3">
+            <div className={`text-[15px]  font-bold leading-3 ${cls? cls:"text-black"}`}>
                 {user.name|| ""}
             </div>
             <button
-            className="text-amber-600 text-sm font-semibold cursor-pointer hover:underline "
+            className={`${logout_class? logout_class:"text-amber-600"} text-sm font-semibold cursor-pointer hover:underline`}
 
             onClick={handleLogout}
             >

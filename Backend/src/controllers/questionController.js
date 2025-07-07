@@ -48,22 +48,8 @@ const addQuestionsToSession = async (req,res) => {
 const togglePinQuestion = async (req,res) => {
     try{
 
-        //* Better Approach(for Production)
-        const {questionId} = req.params;
-        const response = await Question.findOneAndUpdate(
-            { id:questionId },
-            [
-                {
-                    $set: {
-                        isPinned: { $not: "$isPinned" }
-                    }
-                }
-            ],// for toggling the boolean value
-            { new: true} //returns the updated document
-        );
-
-        // const  questionId  = req.params.id;
-        // const response=await Question.findById(questionId);
+        const  questionId  = req.params.id;
+        const response=await Question.findById(questionId);
         
         if (!response) {
             return res.status(404).json({
@@ -74,8 +60,8 @@ const togglePinQuestion = async (req,res) => {
             });
         }
 
-        // response.isPinned = !response.isPinned;
-        // await response.save();
+        response.isPinned = !response.isPinned;
+        await response.save();
 
         return res.status(200).json({
             message: "Question updated successfully",

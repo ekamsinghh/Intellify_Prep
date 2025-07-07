@@ -52,7 +52,8 @@ const CreateSessionForm = () => {
                 navigate(`/interviewprep/${session_response.data.data._id}`);
             }
         }
-        catch(err){
+        catch(error){
+            console.log(error);
             if (error.response && error.response.data.message){
                 setError(error.response.data.message);
             }

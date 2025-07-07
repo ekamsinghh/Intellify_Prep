@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { LuPlus } from 'react-icons/lu'
+import { LuPlus, LuSparkles } from 'react-icons/lu'
 import { CARD_BG } from '../../utils/data';
 import toast from 'react-hot-toast';
 import DashboardLayout from '../../components/Layouts/DashboardLayout';
@@ -10,6 +10,7 @@ import moment from "moment";
 import SummaryCard from '../../components/Cards/SummaryCard';
 import Modal from '../../components/Modal';
 import CreateSessionForm from './CreateSessionForm';
+import DeleteAlertContent from '../../components/DeleteAlertContent';
 
 const Dashboard= () => {
 
@@ -34,7 +35,18 @@ const Dashboard= () => {
     };
 
     const deleteSession = async (sessionData) => {
-
+        try{
+            await axiosInstance.delete(API_PATHS.SESSION.DELETE(sessionData._id));
+            toast.success("Session Deleted Successfully");
+            setOpenDeleteAlert({
+                open:false,
+                data: null
+            });
+            fetchAllSessiions();
+        }
+        catch(error){
+            console.error("Error deleting the session data: ",error);
+        }
     };
 
     useEffect(()=>{
@@ -42,6 +54,15 @@ const Dashboard= () => {
     },[]);
     return(
         <DashboardLayout>
+            <div className="h-[15vh] flex flex-col justify-center items-center">
+                <h2 className="flex items-center gap-2 text-2xl font-bold">
+                    <LuSparkles className="w-6 h-6 text-indigo-500 animate-bounce" />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500">
+                    Your Sessions
+                    </span>
+                </h2>
+                <p className="text-base text-gray-500 mt-1">Review your journey and keep improving 🚀</p>
+            </div>
             <div className="container mx-auto pt-4 pb-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-15 pt-1 pb-6 px-4 md:px-0">
                     {sessions.map((data,index)=>{
@@ -85,6 +106,23 @@ const Dashboard= () => {
             >
                 <div>
                     <CreateSessionForm/>
+                </div>
+            </Modal>
+
+            <Modal
+            isOpen={openDeleteAlert.open}
+            onClose={()=>setOpenDeleteAlert({
+                open: false,
+                data: null
+            })}
+            title= "Delete Alert"
+            cls="border-2 border-red-500"
+            >
+                <div className="w-[30vw]">
+                    <DeleteAlertContent
+                    content="Are you sure you want to delete this session?"
+                    onDelete={() => deleteSession(openDeleteAlert.data)}
+                    />
                 </div>
             </Modal>
         </DashboardLayout>
